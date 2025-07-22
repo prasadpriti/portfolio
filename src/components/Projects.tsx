@@ -38,55 +38,6 @@ const projects: Project[] = [
 const Projects: React.FC = () => {
   return (
     <Container sx={{ py: 6, position: "relative" }}>
-      {/* Animated SVG background */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: -40,
-          left: "10%",
-          width: 320,
-          height: 180,
-          zIndex: 0,
-          opacity: 0.18,
-          pointerEvents: "none",
-        }}
-      >
-        <svg
-          width="320"
-          height="180"
-          viewBox="0 0 320 180"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient
-              id="projGrad"
-              x1="0"
-              y1="0"
-              x2="320"
-              y2="180"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#7f5af0" />
-              <stop offset="1" stop-color="#2cb67d" />
-            </linearGradient>
-          </defs>
-          <ellipse cx="160" cy="90" rx="140" ry="60" fill="url(#projGrad)">
-            <animate
-              attributeName="rx"
-              values="140;120;140"
-              dur="6s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="ry"
-              values="60;80;60"
-              dur="6s"
-              repeatCount="indefinite"
-            />
-          </ellipse>
-        </svg>
-      </Box>
       <Typography
         variant="h5"
         fontWeight={600}

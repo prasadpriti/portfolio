@@ -39,14 +39,14 @@ const Navbar: React.FC = () => {
       sx={{
         background: darkMode
           ? "linear-gradient(90deg, #232946cc 0%, #7f5af099 100%)"
-          : "linear-gradient(90deg, #fffbe6cc 0%, #fffde499 100%)",
+          : "linear-gradient(90deg, #e3f0facc 0%, #1976d299 100%)",
         backdropFilter: "blur(18px)",
         borderBottom: darkMode
           ? "2.5px solid #7f5af055"
-          : "2.5px solid #FFD60055",
+          : "2.5px solid #1976d255",
         boxShadow: darkMode
           ? "0 4px 32px 0 #7f5af044"
-          : "0 4px 32px 0 #FFD60044",
+          : "0 4px 32px 0 #1976d244",
         borderRadius: "0 0 32px 32px",
         overflow: "visible",
         zIndex: 1200,
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
           height: 6,
           background: darkMode
             ? "linear-gradient(90deg, #7f5af0, #2cb67d)"
-            : "linear-gradient(90deg, #FFD600, #FF9800)",
+            : "linear-gradient(90deg, #1976d2, #1565c0)",
           filter: "blur(8px)",
           opacity: 0.7,
           zIndex: -1,
@@ -84,11 +84,11 @@ const Navbar: React.FC = () => {
               width: 40,
               height: 40,
               borderRadius: "50%",
-              background: darkMode ? "#232946" : "#FFD600",
+              background: darkMode ? "#232946" : "#1976d2",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: darkMode ? "0 0 12px #7f5af0" : "0 0 12px #FFD600",
+              boxShadow: darkMode ? "0 0 12px #7f5af0" : "0 0 12px #1976d2",
               mr: 1,
               position: "relative",
             }}
@@ -173,7 +173,7 @@ const Navbar: React.FC = () => {
                   location.pathname === link.to
                     ? darkMode
                       ? "primary.main"
-                      : "#FFD600"
+                      : "#1976d2"
                     : darkMode
                     ? "text.primary"
                     : "#232946",
@@ -190,13 +190,13 @@ const Navbar: React.FC = () => {
                     location.pathname === link.to
                       ? darkMode
                         ? "linear-gradient(90deg, #7f5af0, #2cb67d)"
-                        : "linear-gradient(90deg, #FFD600, #FF9800)"
+                        : "linear-gradient(90deg, #1976d2, #1565c0)"
                       : "transparent",
                   boxShadow:
                     location.pathname === link.to
                       ? darkMode
                         ? "0 0 16px #7f5af0"
-                        : "0 0 16px #FFD600"
+                        : "0 0 16px #1976d2"
                       : "none",
                   transition: "background 0.3s",
                   animation:
@@ -205,12 +205,12 @@ const Navbar: React.FC = () => {
                       : "none",
                 },
                 "&:hover": {
-                  color: darkMode ? "primary.main" : "#FFD600",
+                  color: darkMode ? "primary.main" : "#1565c0",
                   background: "transparent",
                   "&:after": {
                     background: darkMode
                       ? "linear-gradient(90deg, #7f5af0, #2cb67d)"
-                      : "linear-gradient(90deg, #FFD600, #FF9800)",
+                      : "linear-gradient(90deg, #1976d2, #1565c0)",
                   },
                 },
               }}
@@ -227,18 +227,18 @@ const Navbar: React.FC = () => {
             download
             sx={{
               ml: 2,
-              borderColor: darkMode ? "primary.main" : "#FFD600",
-              color: darkMode ? "primary.main" : "#FFD600",
+              borderColor: darkMode ? "primary.main" : "#1976d2",
+              color: darkMode ? "primary.main" : "#1976d2",
               fontWeight: 600,
               fontFamily: "Space Grotesk, sans-serif",
               letterSpacing: 0.5,
               transition: "all 0.2s",
               "&:hover": {
-                borderColor: darkMode ? "secondary.main" : "#FF9800",
-                color: darkMode ? "secondary.main" : "#FF9800",
+                borderColor: darkMode ? "secondary.main" : "#1565c0",
+                color: darkMode ? "secondary.main" : "#1565c0",
                 background: darkMode
                   ? "rgba(127,90,240,0.08)"
-                  : "rgba(255,214,0,0.08)",
+                  : "rgba(25,118,210,0.08)",
               },
             }}
           >

@@ -1,11 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { ThemeProvider, createTheme, CssBaseline, GlobalStyles } from '@mui/material';
-import App from './App.tsx';
-import type { RootState } from './store';
+import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  GlobalStyles,
+} from "@mui/material";
+import App from "./App.tsx";
+import type { RootState } from "./store";
 
 // Import Google Fonts
-const fontUrl = 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap';
+const fontUrl =
+  "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap";
 
 // FloatingParticles component for animated SVG particles and parallax
 const FloatingParticles: React.FC = () => {
@@ -15,7 +21,7 @@ const FloatingParticles: React.FC = () => {
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -27,13 +33,19 @@ const FloatingParticles: React.FC = () => {
     let particles = Array.from({ length: numParticles }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      r: darkMode ? (1.2 + Math.random() * 1.8) : (10 + Math.random() * 10),
+      r: darkMode ? 1.2 + Math.random() * 1.8 : 10 + Math.random() * 10,
       dx: -0.08 + Math.random() * 0.16,
       dy: -0.08 + Math.random() * 0.16,
       color: darkMode
-        ? (Math.random() > 0.7 ? '#ffe066' : '#fff')
-        : (Math.random() > 0.5 ? '#FFD600' : '#FF9800'),
-      opacity: darkMode ? (0.7 + Math.random() * 0.3) : (0.18 + Math.random() * 0.18),
+        ? Math.random() > 0.7
+          ? "#ffe066"
+          : "#fff"
+        : Math.random() > 0.5
+        ? "#FFD600"
+        : "#FF9800",
+      opacity: darkMode
+        ? 0.7 + Math.random() * 0.3
+        : 0.18 + Math.random() * 0.18,
       twinkle: Math.random() * Math.PI * 2,
     }));
 
@@ -42,11 +54,11 @@ const FloatingParticles: React.FC = () => {
       // Night sky or day sky background
       ctx.clearRect(0, 0, width, height);
       if (darkMode) {
-        ctx.fillStyle = '#181b2a';
+        ctx.fillStyle = "#181b2a";
         ctx.globalAlpha = 1;
         ctx.fillRect(0, 0, width, height);
       } else {
-        ctx.fillStyle = '#f7fafc';
+        ctx.fillStyle = "#e3f0fa"; // Minimal blue for day mode
         ctx.globalAlpha = 1;
         ctx.fillRect(0, 0, width, height);
       }
@@ -63,29 +75,7 @@ const FloatingParticles: React.FC = () => {
           ctx.shadowBlur = 8 * twinkle;
           ctx.fill();
         } else {
-          // Draw sun (circle with rays)
-          ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
-          ctx.fillStyle = p.color;
-          ctx.globalAlpha = p.opacity;
-          ctx.shadowColor = p.color;
-          ctx.shadowBlur = 32;
-          ctx.fill();
-          // Sun rays
-          for (let i = 0; i < 8; i++) {
-            const angle = (i / 8) * 2 * Math.PI;
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate(angle);
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(0, p.r + 10 + Math.sin(Date.now() / 800 + p.twinkle + i) * 2);
-            ctx.strokeStyle = p.color;
-            ctx.globalAlpha = 0.18;
-            ctx.lineWidth = 2;
-            ctx.shadowBlur = 0;
-            ctx.stroke();
-            ctx.restore();
-          }
+          // In day mode, do not draw animated sun or rays, just skip drawing particles
         }
         ctx.restore();
         ctx.globalAlpha = 1;
@@ -116,8 +106,8 @@ const FloatingParticles: React.FC = () => {
         canvas.height = height;
       }
     }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [darkMode]);
 
   // Parallax effect on mouse move
@@ -130,22 +120,22 @@ const FloatingParticles: React.FC = () => {
         canvas.style.transform = `translate(${-x * 30}px, ${-y * 30}px)`;
       }
     }
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
     <canvas
       ref={ref}
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
-        width: '100vw',
-        height: '100vh',
+        width: "100vw",
+        height: "100vh",
         zIndex: 0,
-        pointerEvents: 'none',
-        transition: 'background 0.7s',
+        pointerEvents: "none",
+        transition: "background 0.7s",
       }}
     />
   );
@@ -156,20 +146,20 @@ const Theme: React.FC = () => {
 
   const theme = createTheme({
     palette: {
-      mode: darkMode ? 'dark' : 'light',
+      mode: darkMode ? "dark" : "light",
       primary: {
-        main: '#7f5af0', // Techy purple accent
+        main: darkMode ? "#7f5af0" : "#1976d2", // Blue for day mode
       },
       secondary: {
-        main: '#2cb67d', // Green accent
+        main: darkMode ? "#2cb67d" : "#1565c0", // Blue accent for day mode
       },
       background: {
-        default: darkMode ? '#16161a' : '#fafafa',
-        paper: darkMode ? '#21212b' : '#fff',
+        default: darkMode ? "#16161a" : "#e3f0fa", // Match minimal blue
+        paper: darkMode ? "#21212b" : "#fff",
       },
     },
     typography: {
-      fontFamily: 'Space Grotesk, sans-serif',
+      fontFamily: "Space Grotesk, sans-serif",
     },
   });
 
@@ -179,22 +169,24 @@ const Theme: React.FC = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <FloatingParticles />
-        <GlobalStyles styles={{
-          body: {
-            background: darkMode
-              ? 'linear-gradient(120deg, #232946 0%, #7f5af0 50%, #2cb67d 100%)'
-              : 'linear-gradient(120deg, #fafafa 0%, #7f5af0 50%, #2cb67d 100%)',
-            backgroundSize: '200% 200%',
-            animation: 'gradientMove 12s ease-in-out infinite',
-            minHeight: '100vh',
-            transition: 'background 0.6s',
-          },
-          '@keyframes gradientMove': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' },
-          },
-        }} />
+        <GlobalStyles
+          styles={{
+            body: {
+              background: darkMode
+                ? "linear-gradient(120deg, #232946 0%, #7f5af0 50%, #2cb67d 100%)"
+                : "linear-gradient(120deg, #e3f0fa 0%, #1976d2 50%, #1565c0 100%)",
+              backgroundSize: "200% 200%",
+              animation: "gradientMove 12s ease-in-out infinite",
+              minHeight: "100vh",
+              transition: "background 0.6s",
+            },
+            "@keyframes gradientMove": {
+              "0%": { backgroundPosition: "0% 50%" },
+              "50%": { backgroundPosition: "100% 50%" },
+              "100%": { backgroundPosition: "0% 50%" },
+            },
+          }}
+        />
         <App />
       </ThemeProvider>
     </>
